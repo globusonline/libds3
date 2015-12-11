@@ -33,7 +33,7 @@ Spectra S3 C SDK Development Libraries and Headers
 %setup -q -n ds3_c_sdk-%{version}
 
 %build
-%if %{?rhel}%{!?rhel:0} >= 7
+%if %{?fedora}%{!?fedora:0} >= 22 || %{?rhel}%{!?rhel:0} >= 7
 # Remove files that should be replaced during bootstrap
 rm -rf autom4te.cache
 
