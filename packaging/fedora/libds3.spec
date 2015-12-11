@@ -1,5 +1,4 @@
 Name:		libds3
-%global _name %(tr - _ <<< %{name})
 Version:	1.2.0
 Release:	1%{?dist}
 Vendor:		Globus Support
@@ -31,7 +30,7 @@ Spectra S3 C SDK
 Spectra S3 C SDK Development Libraries and Headers
 
 %prep
-%setup -q -n %{_name}-%{version}
+%setup -q -n ds3_c_sdk-%{version}
 
 %build
 %if %{?fedora}%{!?fedora:0} >= 19 || %{?rhel}%{!?rhel:0} >= 7

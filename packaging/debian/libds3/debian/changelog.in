@@ -1,4 +1,4 @@
-libds3-0 (1.2.0-1+gt6.@distro@) @distro@; urgency=low
+libds3 (1.2.0-1+gt6.@distro@) @distro@; urgency=low
 
   * Initial release
 
