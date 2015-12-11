@@ -11,9 +11,9 @@ Source:		https://github.com/SpectraLogic/ds3_c_sdk/archive/v%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	pkgconfig
-BuildRequires:	libxml2-devel >= 2.34
+BuildRequires:	libxml2-devel >= 2.9
 BuildRequires:	libcurl-devel >= 7.29
-BuildRequires:	glib2-devel >= 2.9
+BuildRequires:	glib2-devel >= 2.34
 BuildRequires:	automake >= 1.11
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	libtool >= 2.2
@@ -33,15 +33,16 @@ Spectra S3 C SDK Development Libraries and Headers
 %setup -q -n ds3_c_sdk-%{version}
 
 %build
-%if %{?fedora}%{!?fedora:0} >= 19 || %{?rhel}%{!?rhel:0} >= 7
+%if %{?rhel}%{!?rhel:0} >= 7
 # Remove files that should be replaced during bootstrap
 rm -rf autom4te.cache
 
+mkdir -p m4
 autoreconf -if
 %endif
 
 %configure \
-           --disable-static 
+           --disable-static \
            --docdir=%{_docdir}/%{name}-%{version} \
            --includedir=%{_includedir}/%{name}
 
