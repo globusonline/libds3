@@ -1,7 +1,7 @@
 Source: libds3
 Priority: optional
 Maintainer: Globus Toolkit <support@globus.org>
-Build-Depends: debhelper (>= 7), pkg-config, libglib2.0-dev (>= 2.34), libcurl4-openssl-dev (>= 7.29), libxml2-dev (>= 2.9)
+Build-Depends: debhelper (>= 7), pkg-config, libglib2.0-dev (>= 2.34), libcurl4-openssl-dev (>= 7.29), libxml2-dev (>= 2.9), dh-autoreconf
 Standards-Version: 3.9.6
 Section: libs
 Homepage: https://github.com/SpectraLogic/ds3_c_sdk
