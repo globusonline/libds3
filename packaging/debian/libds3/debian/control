@@ -9,7 +9,7 @@ Homepage: https://github.com/SpectraLogic/ds3_c_sdk
 Package: libds3-dev
 Section: libdevel
 Architecture: any
-Depends: libds3-0 (= ${binary:Version}), ${misc:Depends}
+Depends: libglib2.0-dev, libxml2-dev, libcurl4-openssl-dev, libds3-0 (= ${binary:Version}), ${misc:Depends}
 Description: Spectra S3 C SDK Development Files
 
 Package: libds3-0

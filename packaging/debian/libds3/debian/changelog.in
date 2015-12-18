@@ -1,3 +1,9 @@
+libds3 (1.2.0-4+gt6.@distro@) @distro@; urgency=low
+
+  * Add -dev denpendencies
+
+ -- Globus Toolkit <support@globus.org>  Fri, 18 Dec 2015 10:50:49 -0500
+
 libds3 (1.2.0-3+gt6.@distro@) @distro@; urgency=low
 
   * Add includedir path
