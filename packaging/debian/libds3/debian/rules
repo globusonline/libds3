@@ -22,15 +22,13 @@ DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 %:
 	dh $@ --with autoreconf
 
-
-
 override_dh_strip:
 	dh_strip --dbg-package=libds3-dbg
 
 override_dh_auto_configure:
 	dh_auto_configure -- \
+		--includedir=\$${prefix}/include/libds3 \
 		--libdir=\$${prefix}/lib/$(DEB_HOST_MULTIARCH) \
-                --includedir=\$${prefix}/include/libds3 \
 		--enable-shared \
 		--disable-static
 
