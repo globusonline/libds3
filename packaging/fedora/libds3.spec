@@ -32,7 +32,7 @@ Spectra S3 C SDK
 Spectra S3 C SDK Development Libraries and Headers
 
 %prep
-%setup -q -n ds3_c_sdk-%{version}
+%setup -q -n ds3_c_sdk-%{_commit}
 
 %build
 %if %{?fedora}%{!?fedora:0} >= 22 || %{?rhel}%{!?rhel:0} >= 7
