@@ -1,13 +1,15 @@
 Name:		libds3
+%global _commit master
 Version:	1.2.0
-Release:	1%{?dist}
+Release:	2%{?dist}
 Vendor:		Globus Support
 Summary:	Spectra S3 C SDK
 
 Group:		System Environment/Libraries
 License:	ASL 2.0
 URL:		https://github.com/SpectraLogic/ds3_c_sdk
-Source:		https://github.com/SpectraLogic/ds3_c_sdk/archive/v%{version}.tar.gz
+Source:		https://github.com/SpectraLogic/ds3_c_sdk/archive/%{_commit}.tar.gz
+#Source:	https://github.com/SpectraLogic/ds3_c_sdk/archive/v%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	pkgconfig
@@ -77,5 +79,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Fri Dec 11 2015 Globus Toolkit <support@globus.org> - 1.2.0-2
+- Update to latest upstream
+
 * Fri Dec 11 2015 Globus Toolkit <support@globus.org> - 1.2.0-1
 - Initial package
