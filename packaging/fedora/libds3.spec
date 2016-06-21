@@ -1,7 +1,7 @@
 Name:		libds3
-%global _commit master
+%global _commit 32ab3a88fffc21311670b6043ed8d8a882d019f6
 Version:	1.2.0
-Release:	2%{?dist}
+Release:	3%{?dist}
 Vendor:		Globus Support
 Summary:	Spectra S3 C SDK
 
