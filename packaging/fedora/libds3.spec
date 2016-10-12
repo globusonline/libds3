@@ -1,15 +1,19 @@
 Name:		libds3
 %global _commit 32ab3a88fffc21311670b6043ed8d8a882d019f6
+%if %{?suse_version}%{!?suse_version:0} >= 1315
+%global apache_license Apache-2.0
+%else
+%global apache_license ASL 2.0
+%endif
 Version:	1.2.0
-Release:	4%{?dist}
+Release:	5%{?dist}
 Vendor:		Globus Support
 Summary:	Spectra S3 C SDK
 
 Group:		System Environment/Libraries
-License:	ASL 2.0
+License:        %{apache_license}
 URL:		https://github.com/SpectraLogic/ds3_c_sdk
 Source:		https://github.com/SpectraLogic/ds3_c_sdk/archive/%{_commit}.tar.gz
-#Source:	https://github.com/SpectraLogic/ds3_c_sdk/archive/v%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	pkgconfig
@@ -19,6 +23,21 @@ BuildRequires:	glib2-devel >= 2.34
 BuildRequires:	automake >= 1.11
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	libtool >= 2.2
+
+%if %{?suse_version}%{!?suse_version:0} >= 1315
+%global mainpkg lib%{_name}%{soname}
+%global nmainpkg -n %{mainpkg}
+%else
+%global mainpkg %{name}
+%endif
+
+%if %{?nmainpkg:1}%{!?nmainpkg:0} != 0
+%package %{?nmainpkg}
+Summary:	Spectra S3 C SDK
+Group:          System Environment/Libraries
+%description %{?nmainpkg}
+Spectra S3 C SDK Development Libraries and Headers
+%endif
 
 %package devel
 Summary:	Spectra S3 C SDK Development Libraries
@@ -61,11 +80,11 @@ make %{?_smp_mflags} check
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post -p /sbin/ldconfig
+%post %{nmainpkg} -p /sbin/ldconfig
 
-%postun -p /sbin/ldconfig
+%postun %{nmainpkg} -p /sbin/ldconfig
 
-%files 
+%files %{nmainpkg}  
 %defattr(-,root,root,-)
 %{_libdir}/%{name}.so.*
 
@@ -77,7 +96,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
-* Fri Dec 11 2015 Globus Toolkit <support@globus.org> - 1.2.0-4
+* Fri Dec 11 2015 Globus Toolkit <support@globus.org> - 1.2.0-5
 - Update to latest upstream
 
 * Fri Dec 11 2015 Globus Toolkit <support@globus.org> - 1.2.0-1
