@@ -1,7 +1,7 @@
 Name:		libds3
 %global _commit 32ab3a88fffc21311670b6043ed8d8a882d019f6
 Version:	1.2.0
-Release:	3%{?dist}
+Release:	4%{?dist}
 Vendor:		Globus Support
 Summary:	Spectra S3 C SDK
 
@@ -35,13 +35,11 @@ Spectra S3 C SDK Development Libraries and Headers
 %setup -q -n ds3_c_sdk-%{_commit}
 
 %build
-%if %{?fedora}%{!?fedora:0} >= 22 || %{?rhel}%{!?rhel:0} >= 7
 # Remove files that should be replaced during bootstrap
 rm -rf autom4te.cache
 
 mkdir -p m4
 autoreconf -if
-%endif
 
 %configure \
            --disable-static \
@@ -79,7 +77,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
-* Fri Dec 11 2015 Globus Toolkit <support@globus.org> - 1.2.0-2
+* Fri Dec 11 2015 Globus Toolkit <support@globus.org> - 1.2.0-4
 - Update to latest upstream
 
 * Fri Dec 11 2015 Globus Toolkit <support@globus.org> - 1.2.0-1
