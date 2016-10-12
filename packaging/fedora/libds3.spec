@@ -7,7 +7,7 @@ Name:		libds3
 %endif
 %global soname 0
 Version:	1.2.0
-Release:	7%{?dist}
+Release:	8%{?dist}
 Vendor:		Globus Support
 Summary:	Spectra S3 C SDK
 
@@ -26,7 +26,7 @@ BuildRequires:	autoconf >= 2.60
 BuildRequires:	libtool >= 2.2
 
 %if %{?suse_version}%{!?suse_version:0} >= 1315
-%global mainpkg lib%{name}%{soname}
+%global mainpkg %{name}-%{soname}
 %global nmainpkg -n %{mainpkg}
 %else
 %global mainpkg %{name}
@@ -97,7 +97,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
-* Fri Dec 11 2015 Globus Toolkit <support@globus.org> - 1.2.0-6
+* Fri Dec 11 2015 Globus Toolkit <support@globus.org> - 1.2.0-8
 - Update to latest upstream
 
 * Fri Dec 11 2015 Globus Toolkit <support@globus.org> - 1.2.0-1
