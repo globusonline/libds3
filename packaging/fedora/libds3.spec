@@ -5,8 +5,9 @@ Name:		libds3
 %else
 %global apache_license ASL 2.0
 %endif
+%global soname 0
 Version:	1.2.0
-Release:	6%{?dist}
+Release:	7%{?dist}
 Vendor:		Globus Support
 Summary:	Spectra S3 C SDK
 
@@ -25,7 +26,7 @@ BuildRequires:	autoconf >= 2.60
 BuildRequires:	libtool >= 2.2
 
 %if %{?suse_version}%{!?suse_version:0} >= 1315
-%global mainpkg lib%{_name}%{soname}
+%global mainpkg lib%{name}%{soname}
 %global nmainpkg -n %{mainpkg}
 %else
 %global mainpkg %{name}
