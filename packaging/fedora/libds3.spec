@@ -6,7 +6,7 @@ Name:		libds3
 %global apache_license ASL 2.0
 %endif
 Version:	1.2.0
-Release:	5%{?dist}
+Release:	6%{?dist}
 Vendor:		Globus Support
 Summary:	Spectra S3 C SDK
 
@@ -32,10 +32,10 @@ BuildRequires:	libtool >= 2.2
 %endif
 
 %if %{?nmainpkg:1}%{!?nmainpkg:0} != 0
-%package %{?nmainpkg}
+%package %{nmainpkg}
 Summary:	Spectra S3 C SDK
 Group:          System Environment/Libraries
-%description %{?nmainpkg}
+%description %{nmainpkg}
 Spectra S3 C SDK Development Libraries and Headers
 %endif
 
@@ -80,11 +80,11 @@ make %{?_smp_mflags} check
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post %{nmainpkg} -p /sbin/ldconfig
+%post %{?nmainpkg} -p /sbin/ldconfig
 
-%postun %{nmainpkg} -p /sbin/ldconfig
+%postun %{?nmainpkg} -p /sbin/ldconfig
 
-%files %{nmainpkg}  
+%files %{?nmainpkg}  
 %defattr(-,root,root,-)
 %{_libdir}/%{name}.so.*
 
@@ -96,7 +96,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
-* Fri Dec 11 2015 Globus Toolkit <support@globus.org> - 1.2.0-5
+* Fri Dec 11 2015 Globus Toolkit <support@globus.org> - 1.2.0-6
 - Update to latest upstream
 
 * Fri Dec 11 2015 Globus Toolkit <support@globus.org> - 1.2.0-1
