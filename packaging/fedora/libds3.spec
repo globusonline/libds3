@@ -7,7 +7,7 @@ Name:		libds3
 %endif
 %global soname 0
 Version:	1.2.0
-Release:	8%{?dist}
+Release:	9%{?dist}
 Vendor:		Globus Support
 Summary:	Spectra S3 C SDK
 
@@ -43,7 +43,7 @@ Spectra S3 C SDK Development Libraries and Headers
 %package devel
 Summary:	Spectra S3 C SDK Development Libraries
 Group:		Development/Libraries
-Requires:	%{name}%{?_isa} = %{version}-%{release}
+Requires:	%{mainpkg}%{?_isa} = %{version}-%{release}
 
 %description
 Spectra S3 C SDK
@@ -97,6 +97,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Fri Jan 27 2017 Globus Toolkit <support@globus.org> - 1.2.0-9
+- fix SLES package
+
 * Fri Dec 11 2015 Globus Toolkit <support@globus.org> - 1.2.0-8
 - Update to latest upstream
 
