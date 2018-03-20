@@ -1,8 +1,8 @@
-libds3 (1.2.0g3-1+gt6.@distro@) @distro@; urgency=low
+libds3 (1.2.0g4-1+gt6.@distro@) @distro@; urgency=low
 
   * bump for artful packaging issue
 
- -- Globus Toolkit <support@globus.org>  Wed, 14 Dec 2016 09:39:31 -0500
+ -- Globus Toolkit <support@globus.org>  Tue, 20 Mar 2018 14:45:19 -0500
 
 libds3 (1.2.0g2-1+gt6.@distro@) @distro@; urgency=low
 
