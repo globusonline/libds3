@@ -7,7 +7,7 @@ Name:		libds3
 %endif
 %global soname 0
 Version:	1.2.0g5
-Release:	1%{?dist}
+Release:	2%{?dist}
 Vendor:		Globus Support
 Summary:	Spectra S3 C SDK
 
@@ -15,7 +15,7 @@ Group:		System Environment/Libraries
 License:        %{apache_license}
 URL:		https://github.com/SpectraLogic/ds3_c_sdk
 #Source:	https://github.com/SpectraLogic/ds3_c_sdk/archive/%{_commit}.tar.gz
-URL:		https://downloads.globus.org/toolkit/gt6/packages/libds3-1.2.0g5.tar.gz
+Source:		https://downloads.globus.org/toolkit/gt6/packages/libds3-1.2.0g5.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	pkgconfig
@@ -98,7 +98,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
-* Tue Mar 20 2018 Globus Toolkit <support@globus.org> - 1.2.0g5-1
+* Tue Mar 20 2018 Globus Toolkit <support@globus.org> - 1.2.0g5-2
 - packaging fixes
 
 * Fri Jan 27 2017 Globus Toolkit <support@globus.org> - 1.2.0-9
