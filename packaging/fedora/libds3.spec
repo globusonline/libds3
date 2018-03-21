@@ -6,15 +6,16 @@ Name:		libds3
 %global apache_license ASL 2.0
 %endif
 %global soname 0
-Version:	1.2.0
-Release:	9%{?dist}
+Version:	1.2.0g5
+Release:	1%{?dist}
 Vendor:		Globus Support
 Summary:	Spectra S3 C SDK
 
 Group:		System Environment/Libraries
 License:        %{apache_license}
 URL:		https://github.com/SpectraLogic/ds3_c_sdk
-Source:		https://github.com/SpectraLogic/ds3_c_sdk/archive/%{_commit}.tar.gz
+#Source:	https://github.com/SpectraLogic/ds3_c_sdk/archive/%{_commit}.tar.gz
+URL:		https://downloads.globus.org/toolkit/gt6/packages/libds3-1.2.0g5.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	pkgconfig
@@ -97,6 +98,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Tue Mar 20 2018 Globus Toolkit <support@globus.org> - 1.2.0g5-1
+- packaging fixes
+
 * Fri Jan 27 2017 Globus Toolkit <support@globus.org> - 1.2.0-9
 - fix SLES package
 

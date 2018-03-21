@@ -1,4 +1,4 @@
-libds3 (1.2.0g4-1+gt6.@distro@) @distro@; urgency=low
+libds3 (1.2.0g5-1+gt6.@distro@) @distro@; urgency=low
 
   * bump for artful packaging issue
 
