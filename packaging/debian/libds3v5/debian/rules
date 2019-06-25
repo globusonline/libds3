@@ -1,0 +1,43 @@
+#!/usr/bin/make -f
+# See debhelper(7) (uncomment to enable)
+# output every command that modifies files on the build system.
+#export DH_VERBOSE = 1
+
+# see EXAMPLES in dpkg-buildflags(1) and read /usr/share/dpkg/*
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/default.mk
+
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+# see FEATURE AREAS in dpkg-buildflags(1)
+#export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+# see ENVIRONMENT in dpkg-buildflags(1)
+# package maintainers to append CFLAGS
+#export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
+# package maintainers to append LDFLAGS
+#export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+
+
+# main packaging script based on dh7 syntax
+%:
+	dh $@ --buildsystem=cmake
+
+override_dh_strip:
+	dh_strip --dbg-package=libds3v5-dbg
+
+pkg_conf_dir=debian/tmp/usr/lib/x86_64-linux-gnu/pkgconfig
+pkg_conf_file=$(pkg_conf_dir)/libds3v5.pc
+pkgconfig:
+	mkdir -p $(pkg_conf_dir)
+	cp libds3.pc.in $(pkg_conf_file)
+	sed -i 's,@prefix@,/usr,g' $(pkg_conf_file)
+	sed -i 's,@exec_prefix@,$${prefix},g' $(pkg_conf_file)
+	sed -i 's,@libdir@,$${prefix}/lib/x86_64-linux-gnu,g' $(pkg_conf_file)
+	sed -i 's,@includedir@,$${prefix}/include/libds3,g' $(pkg_conf_file)
+	sed -i 's,@VERSION@,5.0.0,g' $(pkg_conf_file)
+	sed -i 's,@LIBDS3_DEPENDENCIES@,glib-2.0 >= 2.34 libcurl >= 7.29 libxml-2.0 >= 2.9,g' $(pkg_conf_file)
+
+override_dh_install: pkgconfig
+	dh_install
+
+.PHONY: override_dh_strip override_dh_install pkgconfig
