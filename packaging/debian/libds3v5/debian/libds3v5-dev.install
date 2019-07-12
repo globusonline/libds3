@@ -1,0 +1,2 @@
+usr/local/include/* usr/include/libds3
+usr/lib/*/pkgconfig/*

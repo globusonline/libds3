@@ -1,0 +1,5 @@
+libds3v5 (5.0.0-5.@distro@) @distro@; urgency=low
+
+  * Spectra Logic's DS3 C SDK
+
+ -- Globus Toolkit <support@globus.org>  Thu, 27 Jun 2019 23:20:36 -0500

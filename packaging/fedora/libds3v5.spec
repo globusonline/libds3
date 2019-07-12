@@ -1,30 +1,30 @@
-Name:		libds3
-%global _commit 32ab3a88fffc21311670b6043ed8d8a882d019f6
+Name:		libds3v5
+%global _commit 8bc3d38c43d80d0910dd04d592a880cf85ef6e4b
 %if %{?suse_version}%{!?suse_version:0} >= 1315
 %global apache_license Apache-2.0
 %else
 %global apache_license ASL 2.0
 %endif
 %global soname 0
-Version:	1.2.0g5
-Release:	2%{?dist}
+Version:	5.0.0
+Release:	3%{?dist}
 Vendor:		Globus Support
 Summary:	Spectra S3 C SDK
 
 Group:		System Environment/Libraries
 License:        %{apache_license}
 URL:		https://github.com/SpectraLogic/ds3_c_sdk
-#Source:	https://github.com/SpectraLogic/ds3_c_sdk/archive/%{_commit}.tar.gz
-Source:		https://downloads.globus.org/toolkit/gt6/packages/libds3-1.2.0g5.tar.gz
+Source:		%{_commit}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:	pkgconfig
-BuildRequires:	libxml2-devel >= 2.9
-BuildRequires:	libcurl-devel >= 7.29
-BuildRequires:	glib2-devel >= 2.34
-BuildRequires:	automake >= 1.11
-BuildRequires:	autoconf >= 2.60
-BuildRequires:	libtool >= 2.2
+BuildRequires:  libcurl-devel
+BuildRequires:  libxml2-devel
+BuildRequires:  glib2-devel
+BuildRequires:  openssl-devel
+BuildRequires:  cmake
+Requires:       curl openssl
+Conflicts:      libds3
+
 
 %if %{?suse_version}%{!?suse_version:0} >= 1315
 %global mainpkg %{name}-%{soname}
@@ -56,28 +56,37 @@ Spectra S3 C SDK Development Libraries and Headers
 %setup -q -n ds3_c_sdk-%{_commit}
 
 %build
-# Remove files that should be replaced during bootstrap
-rm -rf autom4te.cache
 
-mkdir -p m4
-autoreconf -if
+sed -i 's/CURL 7.31 REQUIRED/CURL 7.29 REQUIRED/' src/CMakeLists.txt
 
-%configure \
-           --disable-static \
-           --docdir=%{_docdir}/%{name}-%{version} \
-           --includedir=%{_includedir}/%{name}
-
-make %{?_smp_mflags}
+cmake -DCMAKE_INSTALL_PREFIX=/usr  .
+make
 
 %install
-rm -rf $RPM_BUILD_ROOT
-make install DESTDIR=$RPM_BUILD_ROOT
+rm -rf %{buildroot}
+mkdir -p  %{buildroot}
+make DESTDIR=%{buildroot} install
+mkdir -p %{buildroot}%{_libdir}/
+mv %{buildroot}/usr/lib/libds3* %{buildroot}%{_libdir}/
+mkdir -p %{buildroot}/usr/include/ds3/
+mv %{buildroot}/usr/local/include/ds3* %{buildroot}/usr/include/ds3/
 
-# Remove libtool archives (.la files)
-find $RPM_BUILD_ROOT%{_libdir} -name 'lib*.la' -exec rm -v '{}' \;
+mkdir -p %{buildroot}%{_libdir}/pkgconfig
+cat<<EOF >  %{buildroot}%{_libdir}/pkgconfig/%{name}.pc
+prefix=/usr
+exec_prefix=/usr
+libdir=%{_libdir}
+includedir=%{_includedir}/ds3/
+
+Name: DS3
+Description: C SDK for the DS3 REST interface
+Version: %{version}
+Cflags: -I\${includedir}
+Libs: -L\${libdir} -lds3
+EOF
 
 %check
-make %{?_smp_mflags} check
+make %{?_smp_mflags} test
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -86,18 +95,20 @@ rm -rf $RPM_BUILD_ROOT
 
 %postun %{?nmainpkg} -p /sbin/ldconfig
 
-%files %{?nmainpkg}  
+%files %{?nmainpkg}
 %defattr(-,root,root,-)
-%{_libdir}/%{name}.so.*
+%{_libdir}/libds3.so
 
 %files devel
 %defattr(-,root,root,-)
-%dir %{_includedir}/%{name}
-%{_includedir}/%{name}/*.h
-%{_libdir}/%{name}.so
+%{_includedir}/ds3/*.h
+%{_libdir}/libds3.so
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Tue Jun 25 2019 Globus Toolkit <support@globus.org> - 5.0.0-2
+- DS3 C SDK v5.0.0
+
 * Tue Mar 20 2018 Globus Toolkit <support@globus.org> - 1.2.0g5-2
 - packaging fixes
 
