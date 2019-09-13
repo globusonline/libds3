@@ -6,8 +6,12 @@ Name:		libds3v5
 %global apache_license ASL 2.0
 %endif
 %global soname 0
+
+#no debug package
+%global         debug_package %{nil}
+
 Version:	5.0.0
-Release:	3%{?dist}
+Release:	4%{?dist}
 Vendor:		Globus Support
 Summary:	Spectra S3 C SDK
 
@@ -17,6 +21,8 @@ URL:		https://github.com/SpectraLogic/ds3_c_sdk
 Source:		%{_commit}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
+BuildRequires:  gcc
+BuildRequires:  gcc-c++
 BuildRequires:  libcurl-devel
 BuildRequires:  libxml2-devel
 BuildRequires:  glib2-devel
@@ -106,7 +112,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
-* Tue Jun 25 2019 Globus Toolkit <support@globus.org> - 5.0.0-2
+* Tue Jun 25 2019 Globus Toolkit <support@globus.org> - 5.0.0-4
 - DS3 C SDK v5.0.0
 
 * Tue Mar 20 2018 Globus Toolkit <support@globus.org> - 1.2.0g5-2
