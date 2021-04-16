@@ -1,22 +1,16 @@
 Name:		libds3v5
 %global _commit 8bc3d38c43d80d0910dd04d592a880cf85ef6e4b
-%if %{?suse_version}%{!?suse_version:0} >= 1315
-%global apache_license Apache-2.0
-%else
-%global apache_license ASL 2.0
-%endif
-%global soname 0
 
 #no debug package
 %global         debug_package %{nil}
 
 Version:	5.0.0
-Release:	4%{?dist}
+Release:	5%{?dist}
 Vendor:		Globus Support
 Summary:	Spectra S3 C SDK
 
 Group:		System Environment/Libraries
-License:        %{apache_license}
+License:        ASL 2.0
 URL:		https://github.com/SpectraLogic/ds3_c_sdk
 Source:		%{_commit}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -31,26 +25,10 @@ BuildRequires:  cmake
 Requires:       curl openssl
 Conflicts:      libds3
 
-
-%if %{?suse_version}%{!?suse_version:0} >= 1315
-%global mainpkg %{name}-%{soname}
-%global nmainpkg -n %{mainpkg}
-%else
-%global mainpkg %{name}
-%endif
-
-%if %{?nmainpkg:1}%{!?nmainpkg:0} != 0
-%package %{nmainpkg}
-Summary:	Spectra S3 C SDK
-Group:          System Environment/Libraries
-%description %{nmainpkg}
-Spectra S3 C SDK Development Libraries and Headers
-%endif
-
 %package devel
 Summary:	Spectra S3 C SDK Development Libraries
 Group:		Development/Libraries
-Requires:	%{mainpkg}%{?_isa} = %{version}-%{release}
+Requires:	%{name}%{?_isa} = %{version}-%{release}
 
 %description
 Spectra S3 C SDK
@@ -97,11 +75,11 @@ make %{?_smp_mflags} test
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post %{?nmainpkg} -p /sbin/ldconfig
+%post -p /sbin/ldconfig
 
-%postun %{?nmainpkg} -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
-%files %{?nmainpkg}
+%files
 %defattr(-,root,root,-)
 %{_libdir}/libds3.so
 
