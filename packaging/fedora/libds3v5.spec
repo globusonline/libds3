@@ -108,7 +108,6 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(-,root,root,-)
 %{_includedir}/ds3/*.h
-%{_libdir}/libds3.so
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
