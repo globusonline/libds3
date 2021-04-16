@@ -41,13 +41,13 @@ pipeline {
             steps {
                 script {
                     parallel "debian": {
-                        buildProps.DEB_ARTIFACTS_STASH = buildDebian(
+                        env.DEB_ARTIFACTS_STASH = buildDebian(
                                 env.SOURCE_STASH,
                                 SOURCE_TARBALL_NAME,
                                 false,
                                 getClubhouseEpic())
                     }, "rpm": {
-                        buildProps.RPM_ARTIFACTS_STASH = buildMock(
+                        env.RPM_ARTIFACTS_STASH = buildMock(
                             env.SOURCE_STASH,
                             SOURCE_TARBALL_NAME,
                             false,
@@ -63,11 +63,11 @@ pipeline {
                     def stashname = "${UUID.randomUUID()}"
 
                     dir("artifacts") {
-                        if (buildProps.DEB_ARTIFACTS_STASH) {
-                            unstash(name: buildProps.DEB_ARTIFACTS_STASH)
+                        if (env.DEB_ARTIFACTS_STASH) {
+                            unstash(name: env.DEB_ARTIFACTS_STASH)
                         }
-                        if (buildProps.RPM_ARTIFACTS_STASH) {
-                            unstash(name: buildProps.RPM_ARTIFACTS_STASH)
+                        if (env.RPM_ARTIFACTS_STASH) {
+                            unstash(name: env.RPM_ARTIFACTS_STASH)
                         }
                         dir("source") {
                             unstash(name: env.SOURCE_STASH)
