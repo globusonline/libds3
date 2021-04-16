@@ -57,29 +57,31 @@ pipeline {
             }
         }
         stage ("Publish Results") {
-            node (label: "master") {
+            agent { label "master" }
+            steps {
+                script {
+                    def stashname = "${UUID.randomUUID()}"
 
-            def stashname = "${UUID.randomUUID()}"
-
-            dir("artifacts") {
-                if (buildProps.DEB_ARTIFACTS_STASH) {
-                    unstash(name: buildProps.DEB_ARTIFACTS_STASH)
+                    dir("artifacts") {
+                        if (buildProps.DEB_ARTIFACTS_STASH) {
+                            unstash(name: buildProps.DEB_ARTIFACTS_STASH)
+                        }
+                        if (buildProps.RPM_ARTIFACTS_STASH) {
+                            unstash(name: buildProps.RPM_ARTIFACTS_STASH)
+                        }
+                        dir("source") {
+                            unstash(name: env.SOURCE_STASH)
+                            sh """rm -rf *.spec debian"""
+                        }
+                        stash(name: stashname, includes: "**/*")
+                        deleteDir()
+                    }
+                    publishResults(
+                        stashname,
+                        env.PACKAGE,
+                        env.PACKAGE_VERSION,
+                        false)
                 }
-                if (buildProps.RPM_ARTIFACTS_STASH) {
-                    unstash(name: buildProps.RPM_ARTIFACTS_STASH)
-                }
-                dir("source") {
-                    unstash(name: env.SOURCE_STASH)
-                    sh """rm -rf *.spec debian"""
-                }
-                stash(name: stashname, includes: "**/*")
-                deleteDir()
-            }
-            publishResults(
-                stashname,
-                env.PACKAGE,
-                env.PACKAGE_VERSION,
-                false)
             }
         }
     }
