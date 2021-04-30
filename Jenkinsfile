@@ -79,7 +79,7 @@ pipeline {
                         stashname,
                         env.PACKAGE,
                         env.PACKAGE_VERSION,
-                        false)
+                        true)
                 }
             }
         }
