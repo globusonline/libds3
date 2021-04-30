@@ -70,7 +70,10 @@ pipeline {
                         }
                         dir("source") {
                             unstash(name: env.SOURCE_STASH)
-                            sh """rm -rf *.spec debian"""
+                            dir(env.SOURCE_STASH) {
+                                sh "cp *.tar.gz .."
+                                deleteDir()
+                            }
                         }
                         stash(name: stashname, includes: "**/*")
                         deleteDir()
