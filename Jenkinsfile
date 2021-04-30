@@ -1,6 +1,6 @@
 #! groovy
 
-@Library('gcs-build-scripts@debian-cowbuilder-init') _
+@Library('gcs-build-scripts') _
 
 def SOURCE_TARBALL_NAME = "8bc3d38c43d80d0910dd04d592a880cf85ef6e4b.tar.gz"
 def SOURCE_TARBALL_URL = "https://github.com/SpectraLogic/ds3_c_sdk/archive/${SOURCE_TARBALL_NAME}"
@@ -18,8 +18,6 @@ pipeline {
             steps {
                 checkout scm
                 script {
-                    // not really an epic, but used to test the build sys
-                    env.EPIC = "2729"
                     env.PACKAGE = "libds3v5"
                     env.PACKAGE_VERSION = "5.0.0"
 
