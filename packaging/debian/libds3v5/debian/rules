@@ -40,4 +40,7 @@ pkgconfig:
 override_dh_install: pkgconfig
 	dh_install
 
-.PHONY: override_dh_strip override_dh_install pkgconfig
+override_dh_builddeb:
+	dh_builddeb -- -Zxz
+
+.PHONY: override_dh_strip override_dh_install override_dh_builddeb pkgconfig
