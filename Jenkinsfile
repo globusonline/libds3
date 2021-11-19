@@ -19,8 +19,7 @@ pipeline {
             steps {
                 checkout scm
                 script {
-                    // Fake epic for rebuild
-                    env.EPIC = "10206"
+                    env.STABLE_TAG = '${PACKAGE_NAME}-${PACKAGE_VERSION}-6'
                     env.PACKAGE = "libds3v5"
                     env.PACKAGE_VERSION = "5.0.0"
 
