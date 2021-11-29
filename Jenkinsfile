@@ -21,7 +21,7 @@ pipeline {
                 script {
                     env.STABLE_TAG = '${PACKAGE_NAME}-${PACKAGE_VERSION}-6'
                     env.PACKAGE = "libds3v5"
-                    env.PACKAGE_VERSION = "5.0.0"
+                    env.PACKAGE_VERSION = "5.0.0~rc1"
 
                     env.SOURCE_STASH = "${UUID.randomUUID()}"
 
