@@ -1,4 +1,4 @@
-libds3v5 (5.0.0~rc1-6.@distro@) @distro@; urgency=low
+libds3v5 (5.0.0-6.@distro@) @distro@; urgency=low
 
   * Rebuild for new OS releases
 
