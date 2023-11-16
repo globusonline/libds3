@@ -5,7 +5,7 @@ Name:		libds3v5
 %global         debug_package %{nil}
 
 Version:	5.0.0
-Release:	6%{?dist}
+Release:	7%{?dist}
 Vendor:		Globus Support
 Summary:	Spectra S3 C SDK
 

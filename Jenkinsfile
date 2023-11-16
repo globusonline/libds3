@@ -44,8 +44,8 @@ pipeline {
                         env.DEB_ARTIFACTS_STASH = buildDebian(
                                 env.SOURCE_STASH,
                                 SOURCE_TARBALL_NAME,
-                                false,
-                                getClubhouseEpic())
+                                require_gcs5_repo: false,
+                                epic: getClubhouseEpic())
                     }, "rpm": {
                         env.RPM_ARTIFACTS_STASH = buildMock(
                             env.SOURCE_STASH,

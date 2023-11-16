@@ -1,3 +1,9 @@
+libds3v5 (5.0.0-7.@distro@) @distro@; urgency=low
+
+  * Rebuild for new OS releases
+
+ -- Globus Toolkit <support@globus.org>  Fri, 16 Nov 2023 09:48:16 -0500
+
 libds3v5 (5.0.0-6.@distro@) @distro@; urgency=low
 
   * Rebuild for new OS releases

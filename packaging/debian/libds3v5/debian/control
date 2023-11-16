@@ -8,19 +8,19 @@ Homepage: https://github.com/SpectraLogic/ds3_c_sdk
 
 Package: libds3v5-dev
 Section: libdevel
-Architecture: amd64
+Architecture: amd64 arm64
 Depends: libglib2.0-dev, libxml2-dev, libcurl4-openssl-dev, libds3v5-0 (= ${binary:Version}), ${misc:Depends}
 Conflicts: libds3-dev
 Description: Spectra S3 C SDK Development Files
 
 Package: libds3v5-0
-Architecture: amd64
+Architecture: amd64 arm64
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Conflicts: libds3-0
 Description: Spectra S3 C SDK Libraries
 
 Package: libds3v5-dbg
-Architecture: amd64
+Architecture: amd64 arm64
 Depends: libds3v5-0, ${shlibs:Depends}, ${misc:Depends}
 Conflicts: libds3-dbg
 Description: Spectra S3 C SDK Debug Info
