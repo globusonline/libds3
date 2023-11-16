@@ -25,14 +25,14 @@ DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 override_dh_strip:
 	dh_strip --dbg-package=libds3v5-dbg
 
-pkg_conf_dir=debian/tmp/usr/lib/x86_64-linux-gnu/pkgconfig
+pkg_conf_dir=debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/pkgconfig
 pkg_conf_file=$(pkg_conf_dir)/libds3v5.pc
 pkgconfig:
 	mkdir -p $(pkg_conf_dir)
 	cp libds3.pc.in $(pkg_conf_file)
 	sed -i 's,@prefix@,/usr,g' $(pkg_conf_file)
 	sed -i 's,@exec_prefix@,$${prefix},g' $(pkg_conf_file)
-	sed -i 's,@libdir@,$${prefix}/lib/x86_64-linux-gnu,g' $(pkg_conf_file)
+	sed -i 's,@libdir@,$${prefix}/lib/$(DEB_HOST_MULTIARCH),g' $(pkg_conf_file)
 	sed -i 's,@includedir@,$${prefix}/include/libds3,g' $(pkg_conf_file)
 	sed -i 's,@VERSION@,5.0.0,g' $(pkg_conf_file)
 	sed -i 's,@LIBDS3_DEPENDENCIES@,glib-2.0 >= 2.34 libcurl >= 7.29 libxml-2.0 >= 2.9,g' $(pkg_conf_file)
