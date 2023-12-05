@@ -19,7 +19,7 @@ pipeline {
             steps {
                 checkout scm
                 script {
-                    env.STABLE_TAG = '${PACKAGE_NAME}-${PACKAGE_VERSION}-6'
+                    env.STABLE_TAG = '${PACKAGE_NAME}-${PACKAGE_VERSION}-7'
                     env.PACKAGE = "libds3v5"
                     env.PACKAGE_VERSION = "5.0.0"
 
