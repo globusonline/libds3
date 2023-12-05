@@ -89,7 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
-* Fri Nov 12 2021 Globus Toolkit <support@globus.org> - 5.0.0-6
+* Fri Nov 12 2021 Globus Toolkit <support@globus.org> - 5.0.0-7
 - Rebuild for new OS releases
 
 * Tue Jun 25 2019 Globus Toolkit <support@globus.org> - 5.0.0-4
