@@ -13,6 +13,7 @@ Group:		System Environment/Libraries
 License:        ASL 2.0
 URL:		https://github.com/SpectraLogic/ds3_c_sdk
 Source:		%{_commit}.tar.gz
+Patch0:         active_jobs.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  gcc
@@ -38,6 +39,7 @@ Spectra S3 C SDK Development Libraries and Headers
 
 %prep
 %setup -q -n ds3_c_sdk-%{_commit}
+%patch -P 0 -p1
 
 %build
 

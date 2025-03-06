@@ -1,0 +1,23 @@
+diff --git a/src/ds3_requests.c b/src/ds3_requests.c
+index 310fdae6..b3edebc2 100644
+--- a/src/ds3_requests.c
++++ b/src/ds3_requests.c
+@@ -10544,7 +10544,7 @@ static ds3_error* _parse_top_level_ds3_active_job_list_response(const ds3_client
+     ds3_error* error = NULL;
+     GPtrArray* active_jobs_array = g_ptr_array_new();
+ 
+-    error = _get_request_xml_nodes(xml_blob, &doc, &root, "Jobs");
++    error = _get_request_xml_nodes(xml_blob, &doc, &root, "Data");
+     if (error != NULL) {
+         return error;
+     }
+@@ -15556,7 +15556,8 @@ ds3_error* ds3_get_active_jobs_spectra_s3_request(const ds3_client* client, cons
+ 
+     error = _parse_top_level_ds3_active_job_list_response(client, request, response, xml_blob);
+ 
+-    (*response)->paging = _parse_paging_headers(return_headers);
++    if (error == NULL)
++        (*response)->paging = _parse_paging_headers(return_headers);
+     ds3_string_multimap_free(return_headers);
+ 
+     return error;
