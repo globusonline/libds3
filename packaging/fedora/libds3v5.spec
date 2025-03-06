@@ -5,7 +5,7 @@ Name:		libds3v5
 %global         debug_package %{nil}
 
 Version:	5.0.0
-Release:	7%{?dist}
+Release:	8~a1%{?dist}
 Vendor:		Globus Support
 Summary:	Spectra S3 C SDK
 
@@ -91,6 +91,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Thu Mar 6 2025 Globus Toolkit <support@globus.org> - 5.0.0-8~a1
+- Patch get_active_jobs request
+
 * Fri Nov 12 2021 Globus Toolkit <support@globus.org> - 5.0.0-7
 - Rebuild for new OS releases
 
