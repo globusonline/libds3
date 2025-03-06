@@ -31,6 +31,7 @@ pipeline {
                             curl -LOs "${SOURCE_TARBALL_URL}"
                             cp ../packaging/fedora/libds3v5.spec .
                             cp -R ../packaging/debian/libds3v5/debian debian
+                            cp debian/patches/*.patch .
                         """
                     }
                     stash(name: env.SOURCE_STASH, includes: "${env.SOURCE_STASH}/**/*")
